@@ -1,0 +1,68 @@
+<html>
+<head>
+  <title>Group project</title>
+  <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+  <style>
+
+    #box{
+      border-radius: 25px;
+      border: 2px solid blue;
+      padding: 20px;
+      width: 230px;
+      height: 200px;
+      font-family: Arial, Helvetica, sans-serif;
+
+    }
+button{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  background-color: blue;
+  margin-left:100px;
+  color:white;
+  width: 130px;
+  height: 30px;
+  border: 1px solid blue;
+
+}
+
+    #list{
+      margin-left: 600px;
+      margin-top: 250px;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="list">
+  <div id="box">
+    <h3>Subject: {{subject}}</h3>
+    <h3>Location: {{location}}</h3>
+    <h3>Price: {{price}}</h3>
+    <h3>Spaces: {{count}}<h3/>
+    <button v-on:click='addlist' v-if="canAddToCart">Add To Cart</button>
+    <button disabled="disabled" v-else>Add to Cart</button>
+</div>
+</div>
+</body>
+<script>
+  let app= new Vue({
+    el:'#list',
+    data:{subject:'Maths',location:'London',price:' 100',count:5,canAddToCart:true},
+    methods:{
+      addlist:function(){
+        if(app.count>1){
+          app.count=app.count-1;
+
+        }
+        else{
+          app.count=0;
+          app.canAddToCart=false;
+        }
+
+      }
+
+    }
+  })
+</script>
+</html>
