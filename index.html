@@ -1,68 +1,52 @@
-<html>
-<head>
-  <title>Group project</title>
-  <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
-  <style>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+  </head>
 
-    #box{
-      border-radius: 25px;
-      border: 2px solid blue;
-      padding: 20px;
-      width: 230px;
-      height: 200px;
-      font-family: Arial, Helvetica, sans-serif;
+  <body>
+    <div id="app">
+      <h1>After School Club</h1>
+      <img id="img" v-bind:src="math.imgSRC" v-bind:alt="math.imgALT" />
+      <div class="right">
+        <h3>{{math.subject}}</h3>
+        <p>{{math.location}}</p>
+        <p>Price: {{math.price}}</p>
+        <p>Spaces: {{math.spaces}}</p>
+        <input class="basketbt" type="button" id="addToBasket" value="Add to Basket" v-on:click="toBasket" />
+      </div>
+    </div>
 
-    }
-button{
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 18px;
-  background-color: blue;
-  margin-left:100px;
-  color:white;
-  width: 130px;
-  height: 30px;
-  border: 1px solid blue;
-
-}
-
-    #list{
-      margin-left: 600px;
-      margin-top: 250px;
-    }
-
-  </style>
-</head>
-<body>
-
-<div id="list">
-  <div id="box">
-    <h3>Subject: {{subject}}</h3>
-    <h3>Location: {{location}}</h3>
-    <h3>Price: {{price}}</h3>
-    <h3>Spaces: {{count}}<h3/>
-    <button v-on:click='addlist' v-if="canAddToCart">Add To Cart</button>
-    <button disabled="disabled" v-else>Add to Cart</button>
-</div>
-</div>
-</body>
-<script>
-  let app= new Vue({
-    el:'#list',
-    data:{subject:'Maths',location:'London',price:' 100',count:5,canAddToCart:true},
-    methods:{
-      addlist:function(){
-        if(app.count>1){
-          app.count=app.count-1;
-
-        }
-        else{
-          app.count=0;
-          app.canAddToCart=false;
-        }
-
-      }
-
-    }
-  })
-</script>
+    <script>
+      let app = new Vue({
+        // the root Vue instance
+        el: "#app", // this links to the <div> with the ID #app
+        data: {
+          math: {
+            imgALT: "Math img",
+            imgSRC: "math.png",
+            subject: "Math",
+            location: "London",
+            price: 100,
+            spaces: 10,
+          },
+        }, // this is the 'data' option, its value is a JSON object
+        methods: {
+          toBasket: function () {
+            //check if there are free spaces left
+            if (this.math.spaces > 0) {
+              this.math.spaces -= 1;
+            } else {
+              this.math.spaces = "No spaces";
+            }
+          },
+        },
+      });
+    </script>
+  </body>
 </html>
